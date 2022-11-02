@@ -33,6 +33,10 @@ class Graph:
 
         return ret
 
+    @property
+    def vertices(self):
+        return len(self.edges)
+
 
 if __name__ == "__main__":
     g = Graph()
@@ -52,3 +56,4 @@ if __name__ == "__main__":
     g.add_edge(6, 7, 1)
     g.add_edge(7, 8, 3)
     print(str(g))
+    print(g.vertices())
