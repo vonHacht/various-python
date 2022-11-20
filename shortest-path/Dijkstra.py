@@ -1,29 +1,23 @@
 from queue import PriorityQueue
 
-from Graph import Graph as Graph
+from MatrixGraph import MatrixGraph
 
 
-def create_graph() -> Graph:
-    g = Graph()
-    g.add_edge(0, 1, 4)
-    g.add_edge(0, 6, 7)
-    g.add_edge(1, 6, 11)
-    g.add_edge(1, 7, 20)
-    g.add_edge(1, 2, 9)
-    g.add_edge(2, 3, 6)
-    g.add_edge(2, 4, 2)
-    g.add_edge(3, 4, 10)
-    g.add_edge(3, 5, 5)
-    g.add_edge(4, 5, 15)
-    g.add_edge(4, 7, 1)
-    g.add_edge(4, 8, 5)
-    g.add_edge(5, 8, 12)
-    g.add_edge(6, 7, 1)
-    g.add_edge(7, 8, 3)
+def create_graph() -> MatrixGraph:
+    g = MatrixGraph()
+    g.add_edge(0, 0, 0)
+    g.add_edge(0, 1, 2)
+    g.add_edge(0, 2, 3)
+    g.add_edge(1, 0, 4)
+    g.add_edge(1, 1, 0)
+    g.add_edge(1, 2, 6)
+    g.add_edge(2, 0, 7)
+    g.add_edge(2, 1, 8)
+    g.add_edge(2, 2, 0)
     return g
 
 
-def dijkstra(graph: Graph, start: int):
+def dijkstra(graph: MatrixGraph, start: int):
     D = {v: float('inf') for v in range(graph.vertices)}
     D[start] = 0
 
@@ -31,30 +25,31 @@ def dijkstra(graph: Graph, start: int):
     pq.put((0, start))
     visited = []
 
+    print(f"== Starting at {start}, max vertices {graph.vertices} ==")
+
     while not pq.empty():
         (dist, current_vertex) = pq.get()
         visited.append(current_vertex)
 
+        print(f"Running vertex {current_vertex}")
         for neighbor in range(graph.vertices):
-            print(f"{current_vertex}:{neighbor}")
+            print(f"Visit neighbor {neighbor} ==>")
 
-            if graph.edges[current_vertex][neighbor] != 0:
-
-                distance = graph.edges[current_vertex][neighbor]
-
-                print(f"distance {graph.edges[current_vertex][neighbor]}")
-
+            if graph.matrix[current_vertex][neighbor] != 0:
+                distance = graph.matrix[current_vertex][neighbor]
                 if neighbor not in visited:
                     old_cost = D[neighbor]
                     new_cost = D[current_vertex] + distance
                     if new_cost < old_cost:
+                        print(
+                            f"From {start} to {current_vertex},{neighbor} cost {new_cost}"
+                        )
                         pq.put((new_cost, neighbor))
                         D[neighbor] = new_cost
     return D
 
 
 if __name__ == "__main__":
-    graph = create_graph()
+    graph = MatrixGraph(template=True)
     print(str(graph))
-    d = dijkstra(graph, 0)
-    print(d)
+    print(dijkstra(graph, 0))
