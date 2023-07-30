@@ -43,9 +43,24 @@ def collision(table_size, records):
     return 1 - factorial(table_size) / (factorial(table_size - records) * pow(table_size, records))
 
 
+def mid_square_hash(key, table_size):
+    # Square the key and convert it to a string
+    square = str(key * key)
+
+    # Extract the middle digits (or characters) of the squared value
+    mid_index = len(square) // 2
+    mid_digits = square[mid_index - 1:mid_index + 1]
+
+    # Convert the middle digits to an integer and compute the hash value
+    hash_val = int(mid_digits) % table_size
+
+    return hash_val
+
+
 if __name__ == '__main__':
     print(f"{collision(23, 7) * 100} %")
     print(f"{hashString('hello', 101)}")
     print(f"{hashStringImproved('hello', 101)}")
     print(f"{binning(3600)}")
     print(f"{hashString('hbrc1vbqo', 101)}")
+    print(f"{mid_square_hash(3465, 100)}")
