@@ -21,18 +21,18 @@ ERR_FORMAT = '%(levelname)s %(message)s'  # For errors only
 DEBUG_LOGFILE_FORMAT = '%(asctime)-15s %(levelname)s %(filename)s %(funcName)s %(message)s'
 LOGFILE_FORMAT = '%(asctime)-15s %(levelname)s %(message)s'
 
-console_verbosity_options = {'quiet': -1,
-                             'normal': 0,
-                             'verbose': 5,
-                             'debug': 10
-                             }
+console_verbosity_options = {
+    'quiet': -1,
+    'normal': 0,
+    'verbose': 5,
+    'debug': 10
+}
 
 
 class NoTracebackFormatter(logging.Formatter):
     """
     Formatter that does not ever include stacktraces for exception output.
     """
-
     def __init__(self, fmt=None, datefmt=None, err_fmt=None):
         super(NoTracebackFormatter, self).__init__(fmt=fmt, datefmt=datefmt)
         self._err_format = err_fmt if err_fmt is not None else fmt
@@ -90,7 +90,6 @@ class LoggerNamePrefixFilter(logging.Filter):
     """
     Filters out all non-Anchore records by logger name.
     """
-
     def __init__(self, name='', prefix=None, non_match_loglevel='ERROR'):
         super(LoggerNamePrefixFilter, self).__init__(name)
         self.non_match_level = non_match_loglevel
@@ -101,7 +100,10 @@ class LoggerNamePrefixFilter(logging.Filter):
                record.levelno >= logging.getLevelName(self.non_match_level)
 
 
-def init_output_formatters(output_verbosity='normal', stderr=sys.stderr, logfile=None, debug_logfile=None):
+def init_output_formatters(output_verbosity='normal',
+                           stderr=sys.stderr,
+                           logfile=None,
+                           debug_logfile=None):
     """
     Initialize the CLI logging scheme.
     :param output_verbosity: 'quiet','normal','verbose', or 'debug' controls the output to stdout and its format
@@ -110,7 +112,8 @@ def init_output_formatters(output_verbosity='normal', stderr=sys.stderr, logfile
     """
 
     if output_verbosity not in console_verbosity_options:
-        raise ValueError('output_verbosity must be one of: %s' % list(console_verbosity_options.keys()))
+        raise ValueError('output_verbosity must be one of: %s' %
+                         list(console_verbosity_options.keys()))
 
     # Initialize debug log file, 'anchore-debug.log'. This log has stack-traces and is expected to be human read
     # and intended for developers and debugging, not an operational log.
@@ -120,20 +123,27 @@ def init_output_formatters(output_verbosity='normal', stderr=sys.stderr, logfile
 
     if output_verbosity == 'quiet':
         stderr_handler.setLevel(level='ERROR')
-        stderr_handler.setFormatter(NoTracebackFormatter(fmt=NORMAL_FORMAT, err_fmt=ERR_FORMAT))
-        logging.root.setLevel('ERROR')  # Allow all at top level, filter specifics for each handler
+        stderr_handler.setFormatter(
+            NoTracebackFormatter(fmt=NORMAL_FORMAT, err_fmt=ERR_FORMAT))
+        logging.root.setLevel(
+            'ERROR'
+        )  # Allow all at top level, filter specifics for each handler
 
     elif output_verbosity == 'normal':
         # The specific console logger
         stderr_handler.setLevel('INFO')
-        stderr_formatter = NoTracebackFormatter(fmt=NORMAL_FORMAT, err_fmt=ERR_FORMAT)
+        stderr_formatter = NoTracebackFormatter(fmt=NORMAL_FORMAT,
+                                                err_fmt=ERR_FORMAT)
         stderr_handler.setFormatter(stderr_formatter)
-        stderr_handler.addFilter(LoggerNamePrefixFilter(prefix='anchore', non_match_loglevel='ERROR'))
+        stderr_handler.addFilter(
+            LoggerNamePrefixFilter(prefix='anchore',
+                                   non_match_loglevel='ERROR'))
         logging.root.setLevel('INFO')
 
     elif output_verbosity == 'verbose':
         stderr_handler.setLevel('INFO')
-        stderr_handler.setFormatter(NoTracebackFormatter(fmt=NORMAL_FORMAT, err_fmt=ERR_FORMAT))
+        stderr_handler.setFormatter(
+            NoTracebackFormatter(fmt=NORMAL_FORMAT, err_fmt=ERR_FORMAT))
         logging.root.setLevel('INFO')
 
     elif output_verbosity == 'debug':
@@ -154,14 +164,17 @@ def init_output_formatters(output_verbosity='normal', stderr=sys.stderr, logfile
     if logfile:
         filehandler = logging.FileHandler(logfile)
         filehandler.setLevel('INFO')
-        filehandler.setFormatter(NoTracebackFormatter(fmt=LOGFILE_FORMAT, err_fmt=LOGFILE_FORMAT))
+        filehandler.setFormatter(
+            NoTracebackFormatter(fmt=LOGFILE_FORMAT, err_fmt=LOGFILE_FORMAT))
         logging.root.addHandler(filehandler)
 
 
 if __name__ == '__main__':
     code_debug = True
     print('Running local tests')
-    init_output_formatters('normal', stderr=sys.stderr, debug_logfile='./test_debug.log')
+    init_output_formatters('normal',
+                           stderr=sys.stderr,
+                           debug_logfile='./test_debug.log')
 
     log = logging.getLogger('anchore.test')
     log.debug('Some debug msg')

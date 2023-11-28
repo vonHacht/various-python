@@ -30,13 +30,17 @@ def run_comparison():
 
     # Non-amortized strategy: Doubling size increase
     dynamic_array_non_amortized = DynamicArray()
-    time_non_amortized = timeit.timeit(lambda: [dynamic_array_non_amortized.add_last(i) for i in range(num_operations)],
-                                   number=1)
+    time_non_amortized = timeit.timeit(lambda: [
+        dynamic_array_non_amortized.add_last(i) for i in range(num_operations)
+    ],
+                                       number=1)
 
     # Amortized strategy: Constant size increase
     dynamic_array_amortized = DynamicArray(True)
-    time_amortized = timeit.timeit(lambda: [dynamic_array_amortized.add_last(i) for i in range(num_operations)],
-                                       number=1)
+    time_amortized = timeit.timeit(
+        lambda:
+        [dynamic_array_amortized.add_last(i) for i in range(num_operations)],
+        number=1)
 
     print(f"Non-amortized time: {time_non_amortized:.6f} seconds")
     print(f"Amortized time: {time_amortized:.6f} seconds")

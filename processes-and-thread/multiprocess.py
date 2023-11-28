@@ -1,7 +1,8 @@
 import logging
-from logs import init_output_formatters
 import time
 from multiprocessing import Process, Queue
+
+from logs import init_output_formatters
 
 
 class MultiprocessClass:
@@ -27,7 +28,8 @@ class MultiprocessClass:
 
             self.__queue = Queue(maxsize=1)
 
-            self.__process = Process(target=self.process, args=(log_level, self.__queue))
+            self.__process = Process(target=self.process,
+                                     args=(log_level, self.__queue))
         else:
             logging.info("init")
 
