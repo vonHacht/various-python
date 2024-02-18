@@ -1,0 +1,58 @@
+res = new map O(1)
+for x in xs: O(n)
+    for y in xs: O(n)
+        if x != y: O(1)
+            z = x * y O(1)
+            if not res.containsKey(z) BST: O(n), AVL: O(log n)
+                res put(z, 0)         BST: O(n), AVL: O(log n)
+            res.put(z, res.get(z)+1)  BST: O(n), AVL: O(log n)
+ return res O(1)
+
+
+Total BST: O(n^4)
+Total AVL O(n^2 * log n^2), log n^2 = 2 log n, base 2
+
+| 4 | 1 | 9 | 10
+
+for i = 0 to 3:
+    j = 0
+    for k = 0 + 1 to 3:
+        if 1 < 4:
+            j = 1 // position
+        ...
+        if 9 < 1:
+            ...nej
+        if 10 < 1:
+            ...nej
+    swap 1 and 4
+        ny lista: | 1 | 4 | 9 | 10
+
+if A[j] < A[k]
+
+swap A[i] and A[j]
+
+selection sort
+
+
+                 stack (FIFO) | queue | prio queue (removeMin=remove)
+add(9)               9             9                 9
+add(7)              7,9           7,9               9,7
+x = remove()        9             7                  9
+add(6)              6,9           7,6               9,6
+add(3)              3,6,9        7,6,3              9,6,3
+add(5)            5,3,6,9        7,6,5,3            9,6,3,5
+y = remove()        3,6,9         6,5,3              9,6,5
+z = remove()         6,9           5,3               9,6
+                 x=7, y=5,z=3 | x=9,y=7,z=6 | x=7,y=3,z=5
+
+UCS/Dijkstra
+
+A: F:5, D:7, B:12
+F: D:7, B:12, G:8, E:11
+D: B:12, G:8, E:11, C:9, E:10
+G: B:12, E:11, C:9, E:10, ---> B:11 <---
+C: B:12, E:11, E:10, B:12
+E: ...
+B: ...
+
+A,F:5,D:7,G:8,C:9,E:10,B:12

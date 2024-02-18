@@ -1,0 +1,166 @@
+A: D:2, F:8
+D: E:3, F:7, F:8
+E: G:5, B:7, F:7, F:8
+G: F:6, B:7, F:7, F:8, D:8
+F: B:7, F:7, F:8, D:8, C:15
+B: F:7 F:7, D:8, C:15
+C: ...
+
+G: F:1, D:3
+F: D:3, C:10
+D: C:10, E:4
+E: C:10, B:8
+B: C:10, A:11
+C: A:11, A:13
+A: ...
+
+
+                       add    |  get largest  | remove largest
+linked-list:
+dynamic array
+binary search tree:    O(n)   |   O(n)       | O(n)
+AVL tree:            O(log n) |   O(log n)   | O(log n)
+hash table
+red-black tree:      O(log n)   |  O(log n)  | O(log n)
+max-heap:            O(log n)   |  O(log n ) | O(log n)
+min-heap
+
+queue:
+3,5
+Remove: 3
+5,4,2,8
+Remove: 5
+4,2,8,6
+Remove: 4
+
+stack:
+3,5
+Remove: 5
+3,4,2,8
+Remove: 8
+3,4,2,6
+Remove: 6
+
+priority queue:
+3,5
+Remove: 3
+5,4,2,8 => 2,4,5,8
+Remove: 2
+4,5,8,6 => 4,5,6,8
+Remove: 4
+
+Remove 2
+Move 6 to place of 2
+Replace 3 and 6
+Replace 6 and 5
+
+Add 2
+Replace 2 and 4
+Replace 2 and 4
+Replace 2 and 3
+
+h(59) = 5+9 = 14 (plats 4)
+h(77) = 7+7 = 14 (plats 4)
+h(25) 2+5 = 7 (plats 7)
+h(27) = 2+7 = 9 (plats 9)
+h(98) = 17 (plats 7)
+h(56) = 11 (plats 1)
+h(31)= 4 (plats 4)
+
+Array:
+0:
+1: 56
+2:
+3:
+4: 77 -> 59 -> 31 (59 -> 77 -> 31)
+5:
+6:
+7: 98 -> 25 (25 -> 98)
+8:
+9: 27
+
+8,5,3,4,9,7,4,2,1,6,5
+
+8,5,3,4,9,7   4,2,1,6,5
+
+8,5,3  4,9,7   4,2,1  6,5
+
+
+8,5  3  4,9  7  4,2  1  6,5
+
+5,8  3  4,9  7  2,4  1  6,5
+
+3,5,8    4,7,9   1,2,4  5,6
+
+3,4,5,7,8,9        1,2,4,5,6
+
+    1,2,3,4,4,5,5,6,7,8,9
+
+
+A,B,C,D,E,F,G,H
+
+left        right
+<------------>
+
+bubble sort
+
+instructions left, right, compare, swap
+
+[0,1,2,3,4]
+
+[9,6,7,1,1], pos = 0
+[6,9,7,1,1], pos = 1
+[6,7,9,1,1], pos = 2
+[6,7,1,9,1], pos = 3
+[6,7,1,1,9], pos = 4
+[6,7,1,1,9], pos = 3
+[6,7,1,1,9], pos = 2
+[6,7,1,1,9], pos = 1
+[6,1,7,1,9], pos = 2
+[6,1,1,7,9], pos = 3
+[6,1,1,7,9], pos = 2
+[6,1,1,7,9], pos = 1
+[1,6,1,7,9], pos = 0
+...
+
+
+while true
+    while not compare
+        swap
+        left
+    if not right:
+        break
+
+d(A,B) = 3
+d(A,C) = 3
+d(A,D) = 2
+d(A,E) = 3
+d(A,F) = 6
+d(A,G) = 5
+
+e(A) = 6
+
+push_and_discard(4,9,15,5,23,3)
+
+1. 4
+2. 9,4
+3. 15,9,4
+4. 5,4
+5. 23,5,4
+6. 3
+
+init: O(1)
+pop: O(1)
+push_and_discard: O(N)
+
+
+
+
+
+
+
+
+
+
+
+
